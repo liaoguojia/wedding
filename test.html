@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> our wedding </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E98074',
+                        secondary: '#E8C5C5',
+                        accent: '#5D5C61',
+                        light: '#FAF3F0',
+                        gold: '#D4AF37'
+                    },
+                    fontFamily: {
+                        dancing: ['"Dancing Script"', 'cursive'],
+                        xiaowei: ['"ZCOOL XiaoWei"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            }
+            .gold-gradient {
+                background: linear-gradient(135deg, #D4AF37 0%, #F0E68C 50%, #D4AF37 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+            .float-animation {
+                animation: float 6s ease-in-out infinite;
+            }
+            .float-delay-1 {
+                animation: float 6s ease-in-out 1s infinite;
+            }
+            .float-delay-2 {
+                animation: float 6s ease-in-out 2s infinite;
+            }
+            .fade-in {
+                animation: fadeIn 1.5s ease-out forwards;
+            }
+            .scale-in {
+                animation: scaleIn 0.8s ease-out forwards;
+            }
+            .petal-fall {
+                position: absolute;
+                pointer-events: none;
+                top: -50px;
+                animation: fall linear forwards;
+            }
+            .mouse-heart {
+                position: absolute;
+                pointer-events: none;
+                animation: heart-fall 2s ease-out forwards;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(calc(100vh + 50px)) rotate(720deg);
+            }
+        }
+
+        @keyframes heart-fall {
+            0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(100px) rotate(360deg); }
+        }
+    </style>
+    <style>
+        .wedding-photo {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            transition: transform 0.5s ease;
+        }
+        .wedding-photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: scale(1);
+            transition: transform 0.5s ease;
+        }
+        .photo-mask {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(233,128,116,0.6) 0%, rgba(212,175,55,0.6) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .photo-mask h3 {
+            color: white;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+        .wedding-photo:hover img {
+            transform: scale(1.03);
+        }
+        .wedding-photo:hover .photo-mask {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-light overflow-x-hidden relative">
+    <!-- 花瓣和爱心容器 -->
+    <div id="petal-container" class="fixed inset-0 pointer-events-none z-0"></div>
+    <div id="mouse-heart-container" class="fixed inset-0 pointer-events-none z-50"></div>
+    
+    <!-- 顶部装饰 -->
+    <div class="absolute top-0 left-0 right-0 flex justify-center overflow-hidden">
+        <div class="w-full max-w-6xl h-32 relative">
+            <div class="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-primary/10 to-transparent rounded-b-3xl"></div>
+            <div class="absolute top-4 left-10 text-primary/30 text-4xl float-animation">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="absolute top-8 right-10 text-primary/30 text-4xl float-delay-1">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 主内容 -->
+    <main class="container mx-auto px-4 py-12 min-h-screen flex flex-col items-center justify-center relative z-10">
+        <!-- 请柬卡片 -->
+        <div class="w-full max-w-4xl bg-white/80 backdrop-blur-md rounded-3xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl">
+            <!-- 卡片顶部装饰 -->
+            <div class="h-2 bg-gradient-to-r from-primary to-gold"></div>
+            
+            <!-- 卡片内容 -->
+            <div class="p-6 md:p-12">
+                <!-- 标题区域 -->
+                <div class="text-center mb-12 fade-in opacity-0" style="animation-delay: 0.3s;">
+                    <h2 class="text-2xl md:text-3xl font-dancing text-primary mb-2">以爱之名，共度余生</h2>
+                    <div class="flex justify-center items-center mb-6">
+                        <div class="w-16 h-px bg-primary/30"></div>
+                        <div class="mx-4 text-primary">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="w-16 h-px bg-primary/30"></div>
+                    </div>
+                    <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-dancing font-bold gold-gradient mb-4">婚礼请柬</h1>
+                    <p class="text-xl text-accent">2025</p>
+                </div>
+                
+                <!-- 新人姓名 -->
+                <div class="text-center mb-12 fade-in opacity-0" style="animation-delay: 0.6s;">
+                    <h3 class="text-[clamp(1.8rem,3vw,2.5rem)] font-xiaowei text-accent">
+                        廖国佳 × 邹静
+                    </h3>
+                </div>
+                
+                <!-- 婚纱照区域 -->
+                <div class="wedding-photo max-w-lg mx-auto mb-12 fade-in opacity-0" style="animation-delay: 0.9s;">
+                    <img src="F:\\下载\\wed.jpg" alt="廖国佳 & 邹静 婚纱照" class="rounded-2xl">
+                    <div class="photo-mask">
+                        <h3>Forever Love</h3>
+                    </div>
+                </div>
+                
+                <!-- 誓言 -->
+                <div class="text-center mb-16 fade-in opacity-0" style="animation-delay: 1.2s;">
+                    <p class="text-xl md:text-2xl font-xiaowei text-accent/90 italic leading-relaxed">
+                        我们将以婚姻之名，许下一生的诺言<br>
+                        愿得一心人，白首不相离
+                    </p>
+                </div>
+                
+                <!-- 日期和地点 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 fade-in opacity-0" style="animation-delay: 1.5s;">
+                    <div class="text-center p-6 rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors duration-300">
+                        <div class="text-primary text-3xl mb-3">
+                            <i class="fa-regular fa-calendar-days"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-accent mb-2">婚期</h4>
+                        <p class="text-accent/80">2025年 良辰吉日</p>
+                    </div>
+                    
+                    <div class="text-center p-6 rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors duration-300">
+                        <div class="text-primary text-3xl mb-3">
+                            <i class="fa-regular fa-compass"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-accent mb-2">地点</h4>
+                        <p class="text-accent/80">[酒店名称及地址]</p>
+                    </div>
+                </div>
+                
+                <!-- 邀请信息 -->
+                <div class="text-center fade-in opacity-0" style="animation-delay: 2.1s;">
+                    <p class="text-lg text-accent/80 mb-2">诚挚邀请您拨冗莅临</p>
+                    <p class="text-lg text-accent/80">共同见证我们的幸福时刻</p>
+                </div>
+            </div>
+            
+            <!-- 卡片底部装饰 -->
+            <div class="h-2 bg-gradient-to-r from-gold to-primary"></div>
+        </div>
+        
+        <!-- 页脚 -->
+        <div class="mt-16 text-center text-primary/60 fade-in opacity-0" style="animation-delay: 2.4s;">
+            <p class="text-sm">廖国佳 & 邹静 敬上</p>
+        </div>
+    </main>
+    
+    <!-- 底部装饰 -->
+    <div class="absolute bottom-0 left-0 right-0 flex justify-center overflow-hidden">
+        <div class="w-full max-w-6xl h-32 relative">
+            <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-primary/10 to-transparent rounded-t-3xl"></div>
+            <div class="absolute bottom-4 left-10 text-primary/30 text-4xl float-delay-2">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="absolute bottom-8 right-10 text-primary/30 text-4xl float-animation">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 花瓣emoji
+        const petals = ['🌸', '🌹', '🌺', '💐', '🌼', '🌻'];
+        
+        // 创建飘落的花瓣
+        function createFallingPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal-fall text-2xl md:text-3xl';
+            petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+            
+            // 随机位置和动画持续时间
+            const leftPos = Math.random() * 100;
+            const duration = Math.random() * 10 + 10; // 10-20秒
+            const delay = Math.random() * 5; // 0-5秒延迟
+            
+            petal.style.left = `${leftPos}vw`;
+            petal.style.animationDuration = `${duration}s`;
+            petal.style.animationDelay = `${delay}s`;
+            
+            // 随机旋转
+            const rotation = Math.random() * 360;
+            petal.style.transform = `rotate(${rotation}deg)`;
+            
+            document.getElementById('petal-container').appendChild(petal);
+            
+            // 动画结束后移除元素
+            setTimeout(() => {
+                petal.remove();
+            }, (duration + delay) * 1000);
+        }
+        
+        // 创建鼠标跟随爱心
+        function createMouseHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.className = 'mouse-heart text-2xl';
+            heart.textContent = '❤️';
+            
+            // 随机大小和颜色
+            const size = Math.random() * 10 + 15; // 15-25px
+            const opacity = Math.random() * 0.5 + 0.5; // 0.5-1.0
+            
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+            heart.style.fontSize = `${size}px`;
+            heart.style.opacity = opacity;
+            
+            // 随机旋转
+            const rotation = Math.random() * 360;
+            heart.style.transform = `rotate(${rotation}deg)`;
+            
+            document.getElementById('mouse-heart-container').appendChild(heart);
+            
+            // 动画结束后移除元素
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+        
+        // 鼠标移动事件
+        document.addEventListener('mousemove', (e) => {
+            // 降低创建频率，每100ms创建一个
+            if (Math.random() < 0.2) {
+                createMouseHeart(e.clientX, e.clientY);
+            }
+        });
+        
+        // 触摸设备支持
+        document.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1) {
+                const touch = e.touches[0];
+                // 降低创建频率，每100ms创建一个
+                if (Math.random() < 0.2) {
+                    createMouseHeart(touch.clientX, touch.clientY);
+                }
+            }
+        }, { passive: true });
+        
+        // 页面加载时创建飘落的花瓣
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始创建一些花瓣
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createFallingPetal, i * 500);
+            }
+            
+            // 定时创建花瓣
+            setInterval(createFallingPetal, 1000);
+        });
+    </script>
+</body>
+</html>
